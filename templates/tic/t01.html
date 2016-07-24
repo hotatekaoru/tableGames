@@ -20,16 +20,16 @@
 		<form action="/tic/game2" method="post">
 			{{/* 手番は、inputタグのhiddenで送信 */}}
 			<input type="hidden" name="turn" value="{{$.turn}}">
-			<table>
+			<table id="tic-table">
 				{{range $row, $rows := $.board}}
 				<tr>
 					{{range $col, $cell := $rows}}
-					<td>
+					<td class="tic-td">
 						{{if $cell}} {{/* 「"○"」または「"×"」の場合 */}}
 						{{$cell}}
 						<input type="hidden" name="c{{$row}}{{$col}}" value="{{$cell}}">
 						{{else}} {{/* 「""」の場合 */}}
-						<button name="c{{$row}}{{$col}}" value="{{$.turn}}"></button>
+						<button name="c{{$row}}{{$col}}" value="{{$.turn}}" class="tic-button"></button>
 						{{end}}
 					</td>
 					{{end}}

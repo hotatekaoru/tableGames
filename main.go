@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"unicode"
-	"tic-tac-toe/controller"
+	"tableGames/controller"
 )
 
 const defaultPort = "8080"

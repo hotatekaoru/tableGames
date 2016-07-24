@@ -3,7 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"tic-tac-toe/logic/tic"
+	"tableGames/logic/tic"
 )
 
 func T01G01(c *gin.Context) {
