@@ -11,6 +11,13 @@ const maru, batsu = "○", "×"
 // Board型の宣言
 type Board [3][3]string
 
+// ゲームモード
+// var mode int
+
+func GameStart(c *gin.Context) {
+	print("mode => " + c.PostForm("mode"))
+}
+
 // boardFormValue関数の宣言（盤面の値を取得）
 func BoardFormValue(c *gin.Context) *Board {
 	var board Board
@@ -19,7 +26,6 @@ func BoardFormValue(c *gin.Context) *Board {
 			// 盤面のname属性「c00」～「c22」を作成
 			name := "c" + strconv.Itoa(row) + strconv.Itoa(col)
 			// 盤面の各項目を取得
-			print(c.PostForm(strconv.Itoa(row) + strconv.Itoa(col) + "-> " + name))
 			board[row][col] = c.PostForm(name)
 		}
 	}

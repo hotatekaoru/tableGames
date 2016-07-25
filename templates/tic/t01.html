@@ -6,38 +6,21 @@
 			<h2>マルバツゲーム</h2>
 		</div>
 
-		{{/* $.Turnは手番 */}}
-		<div class="alert alert-info">
-			{{if $.win}}
-			[{{$.winner}}の勝ち]
-			{{else if $.Draw}}
-			[引き分け]
-			{{else}}
-			[{{$.turn}}の番です。]
-			{{end}}
-		</div>
-		<br>
-		<form action="/tic/game2" method="post">
-			{{/* 手番は、inputタグのhiddenで送信 */}}
-			<input type="hidden" name="turn" value="{{$.turn}}">
-			<table id="tic-table">
-				{{range $row, $rows := $.board}}
-				<tr>
-					{{range $col, $cell := $rows}}
-					<td class="tic-td">
-						{{if $cell}} {{/* 「"○"」または「"×"」の場合 */}}
-						{{$cell}}
-						<input type="hidden" name="c{{$row}}{{$col}}" value="{{$cell}}">
-						{{else}} {{/* 「""」の場合 */}}
-						<button name="c{{$row}}{{$col}}" value="{{$.turn}}" class="tic-button"></button>
-						{{end}}
-					</td>
-					{{end}}
-				</tr>
-				{{end}}
-			</table>
+		<h4>ゲームモードを選択してください。</h4>
+		<form action="/tic/game" method="get">
+			<div class="radio">
+				<td>
+					<input type="radio" name="mode" value="1" checked="checked">
+					1人プレイ
+				</td>
+				<td>
+					<input type="radio" name="mode" value="2">
+					2人プレイ
+				</td>
+			</div>
+			<input type="submit" class="btn btn-primary" value="ゲーム開始">
 		</form>
-		<a href="/tic/game">最初に戻る</a>
+		<a href="/">メニューに戻る</a>
 
 	</div>
 </div>

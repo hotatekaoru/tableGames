@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"unicode"
 	"tableGames/controller"
+	"unicode"
 )
 
 const defaultPort = "8080"
@@ -47,10 +47,12 @@ func main() {
 	/* A01_トップ画面表示処理 */
 	router.GET("/", controller.A01G01)
 
-	/* T01_マルバツ_ゲーム開始処理 */
-	router.GET("/tic/game", controller.T01G01)
+	/* T01_マルバツ_ゲームモード選択画面表示処理 */
+	router.GET("/tic/mode", controller.T01G01)
+	/* T02_マルバツ_ゲーム開始処理 */
+	router.GET("/tic/game", controller.T02G01)
 	/* T02_マルバツ_ゲーム実行処理 */
-	router.POST("/tic/game2", controller.T01P02)
+	router.POST("/tic/game", controller.T02P02)
 
 	http.ListenAndServe(":"+port(), router)
 }
@@ -58,18 +60,18 @@ func main() {
 func apiHandle() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		/*
-		var user model.User
+			var user model.User
 
-		db := database.GetDB()
-		if err := db.Where("token = ?", c.Request.Header.Get("X-GODEMO-TOKEN")).Find(&user).Error; err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"errors": []string{"User not found"}})
-			c.Abort()
-			return
-		}
+			db := database.GetDB()
+			if err := db.Where("token = ?", c.Request.Header.Get("X-GODEMO-TOKEN")).Find(&user).Error; err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{"errors": []string{"User not found"}})
+				c.Abort()
+				return
+			}
 
-		c.Set("user", user)
-		c.Next()
-*/
+			c.Set("user", user)
+			c.Next()
+		*/
 		errs := make([]string, 0, len(c.Errors))
 		for _, e := range c.Errors {
 			// 1. エラーの種類で判定
@@ -125,9 +127,9 @@ func port() string {
 }
 
 func migrate() {
-/*
-	db := database.GetDB()
+	/*
+		db := database.GetDB()
 
-	db.AutoMigrate(&model.User{})
-	 */
+		db.AutoMigrate(&model.User{})
+	*/
 }

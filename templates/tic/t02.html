@@ -1,0 +1,45 @@
+{{template "header.html" .}}
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="page-header">
+			<h2>マルバツゲーム</h2>
+		</div>
+
+		{{/* $.Turnは手番 */}}
+		<div class="alert alert-info">
+			{{if $.win}}
+			[{{$.winner}}の勝ち]
+			{{else if $.Draw}}
+			[引き分け]
+			{{else}}
+			[{{$.turn}}の番です。]
+			{{end}}
+		</div>
+		<br>
+		<form action="/tic/game" method="post">
+			{{/* 手番は、inputタグのhiddenで送信 */}}
+			<input type="hidden" name="turn" value="{{$.turn}}">
+			<table id="tic-table">
+				{{range $row, $rows := $.board}}
+				<tr>
+					{{range $col, $cell := $rows}}
+					<td class="tic-td">
+						{{if $cell}} {{/* 「"○"」または「"×"」の場合 */}}
+						{{$cell}}
+						<input type="hidden" name="c{{$row}}{{$col}}" value="{{$cell}}">
+						{{else}} {{/* 「""」の場合 */}}
+						<button name="c{{$row}}{{$col}}" value="{{$.turn}}" class="tic-button"></button>
+						{{end}}
+					</td>
+					{{end}}
+				</tr>
+				{{end}}
+			</table>
+		</form>
+		<a href="/tic/game">もう１回</a>
+		<a href="/">メニューに戻る</a>
+
+	</div>
+</div>
+{{template "footer.html" .}}
