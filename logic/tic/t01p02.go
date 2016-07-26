@@ -39,13 +39,13 @@ var NextTurnMap = map[string]string{
 	"":    maru, // 「""」の場合、ゲーム開始時として「"○"」を取得
 }
 
-func FirstTurn() string{
+func FirstTurn() string {
 	return NextTurnMap[""]
 }
 
 // turnFormValue関数の宣言（手番の値を取得）
 func TurnFormValue(c *gin.Context) (string, string) {
-	turn := c.PostForm("turn")   // 現在の手番を取得
+	turn := c.PostForm("turn")    // 現在の手番を取得
 	nextTurn := NextTurnMap[turn] // マップを使用して次の手番を取得
 	return turn, nextTurn
 }
@@ -70,8 +70,8 @@ func (b *Board) Win(turn string) bool {
 	for _, w := range winBoardIndexArray {
 		// 3個すべてがそろった場合、勝利と判定
 		if (b[w[0].row][w[0].col] == turn) &&
-		(b[w[1].row][w[1].col] == turn) &&
-		(b[w[2].row][w[2].col] == turn) {
+			(b[w[1].row][w[1].col] == turn) &&
+			(b[w[2].row][w[2].col] == turn) {
 			return true
 		}
 	}
