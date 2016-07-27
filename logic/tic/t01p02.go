@@ -25,6 +25,7 @@ func BoardFormValue(c *gin.Context) *Board {
 		for col, _ := range rows {
 			// 盤面のname属性「c00」～「c22」を作成
 			name := "c" + strconv.Itoa(row) + strconv.Itoa(col)
+			println("cell => " + c.PostForm(name))
 			// 盤面の各項目を取得
 			board[row][col] = c.PostForm(name)
 		}
