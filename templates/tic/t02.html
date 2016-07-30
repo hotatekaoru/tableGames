@@ -17,7 +17,7 @@
 			{{end}}
 		</div>
 		<br>
-		<form action="/tic/game" name="formA" method="post">
+		<form action="/tic/game" method="post">
 			{{/* 手番は、inputタグのhiddenで送信 */}}
 			<input type="hidden" name="turn" value="{{$.turn}}">
 			<table id="tic-table">
@@ -37,8 +37,10 @@
 				{{end}}
 			</table>
 		</form>
-		<a href="/tic/game">もう１回</a>
-		<a href="/">メニューに戻る</a>
+		<div class="buttom-link">
+			<a href="/tic/game">もう１回</a>
+			<a href="/">メニューに戻る</a>
+		</div>
 
 	</div>
 </div>

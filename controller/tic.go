@@ -12,7 +12,7 @@ func T01G01(c *gin.Context) {
 
 }
 
-func T02G01(c *gin.Context) {
+func T02P01(c *gin.Context) {
 
 	tic.GameStart(c)
 

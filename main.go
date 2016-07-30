@@ -50,7 +50,7 @@ func main() {
 	/* T01_マルバツ_ゲームモード選択画面表示処理 */
 	router.GET("/tic/mode", controller.T01G01)
 	/* T02_マルバツ_ゲーム開始処理 */
-	router.GET("/tic/game", controller.T02G01)
+	router.POST("/tic/mode", controller.T02P01)
 	/* T02_マルバツ_ゲーム実行処理 */
 	router.POST("/tic/game", controller.T02P02)
 

@@ -7,21 +7,24 @@
 		</div>
 
 		<h4>ゲームモードを選択してください。</h4>
-			<form action="/tic/game" method="get">
+			<form action="/tic/mode" method="post">
 			<div class="radio">
-				<td>
-					<input type="radio" name="mode" value="1" checked="checked">
-					1人プレイ
-				</td>
-				<td>
-					<input type="radio" name="mode" value="2">
-					2人プレイ
-				</td>
+				<ul class="list-group">
+					<li>
+						<input type="radio" id="mode1" name="mode" value="1" checked="checked">
+						<label for="mode1">1人プレイ</label>
+					</li>
+					<li>
+						<input type="radio" id="mode2" name="mode" value="2">
+						<label for="mode2">2人プレイ</label>
+					</li>
+				</ul>
 			</div>
 			<input type="submit" class="btn btn-primary" value="ゲーム開始">
 		</form>
-		<a href="/">メニューに戻る</a>
-
+		<div class="buttom-link">
+			<a href="/">メニューに戻る</a>
+		</div>
 	</div>
 </div>
 {{template "footer.html" .}}
