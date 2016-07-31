@@ -1,6 +1,5 @@
-package ai
+package main
 
-import (
-	"github.com/gin-gonic/gin"
-	"strconv"
-)
+func main() {
+	println("CPU起動")
+}

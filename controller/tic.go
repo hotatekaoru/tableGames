@@ -4,9 +4,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"tableGames/logic/tic"
+	"os/exec"
 )
 
 func T01G01(c *gin.Context) {
+
+	// 外部ファイル起動の練習
+	out, err := exec.Command("./normal").CombinedOutput()
+	if err != nil {
+		println(err)
+	}
+	println(string(out))
 
 	c.HTML(http.StatusOK, "t01.html", gin.H{})
 
