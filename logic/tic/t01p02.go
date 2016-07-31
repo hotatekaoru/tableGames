@@ -15,7 +15,7 @@ type Board [3][3]string
 // var mode int
 
 func GameStart(c *gin.Context) {
-	print("mode => " + c.PostForm("mode"))
+	println("mode => " + c.PostForm("mode"))
 }
 
 // boardFormValue関数の宣言（盤面の値を取得）
