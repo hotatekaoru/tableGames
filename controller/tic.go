@@ -10,7 +10,7 @@ import (
 func T01G01(c *gin.Context) {
 
 	// 外部ファイル起動の練習
-	out, err := exec.Command("./normal").CombinedOutput()
+	out, err := exec.Command("./normal", "").CombinedOutput()
 	if err != nil {
 		println(err)
 	}
@@ -24,7 +24,7 @@ func T02P01(c *gin.Context) {
 
 	tic.GameStart(c)
 
-	// 手番の入力値を取得する
+	// 手番を初期化する
 	nextTurn := tic.FirstTurn()
 	// 盤面の入力値を取得する
 	board := tic.BoardFormValue(c)
@@ -47,21 +47,7 @@ func T02P02(c *gin.Context) {
 	board := tic.BoardFormValue(c)
 
 	// 勝敗、引き分け、勝者の変数宣言
-	win, draw, winner := false, false, ""
-
-	win = board.Win(turn) // 勝敗の判定
-
-	// 勝敗が付いた場合
-	if win {
-		// 勝者を設定
-		winner = turn
-		// 未入力の項目に「"-"」を設定
-		board.SetBar()
-		// 勝敗が付かない場合
-	} else {
-		// 引き分けの判定
-		draw = board.Draw()
-	}
+	win, draw, winner := tic.JudgeWinner(board, turn)
 
 	c.HTML(http.StatusOK, "t02.html", gin.H{
 		"turn":   nextTurn,

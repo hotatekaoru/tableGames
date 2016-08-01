@@ -51,7 +51,28 @@ func TurnFormValue(c *gin.Context) (string, string) {
 	return turn, nextTurn
 }
 
-// 変数winBoardIndexArrayに、勝敗判定用の構造体の2次元配列を設定 … ③
+func JudgeWinner(board *Board, turn string) (bool, bool, string){
+	// 勝敗の判定
+	win := board.Win(turn)
+	draw, winner := false, ""
+
+	// 勝敗が付いた場合
+	if win {
+		// 勝者を設定
+		winner = turn
+		// 未入力の項目に「"-"」を設定
+		board.SetBar()
+		// 勝敗が付かない場合
+	} else {
+		// 引き分けの判定
+		draw = board.Draw()
+	}
+
+	return win, draw, winner
+
+}
+
+// 変数winBoardIndexArrayに、勝敗判定用の構造体の2次元配列を設定
 var winBoardIndexArray = [...][3]struct{ row, col int }{
 	// 横（行）の判定
 	{{0, 0}, {0, 1}, {0, 2}},
@@ -66,7 +87,7 @@ var winBoardIndexArray = [...][3]struct{ row, col int }{
 	{{0, 2}, {1, 1}, {2, 0}},
 }
 
-// winメソッドの宣言（勝敗の判定）… ④
+// winメソッドの宣言（勝敗の判定）
 func (b *Board) Win(turn string) bool {
 	for _, w := range winBoardIndexArray {
 		// 3個すべてがそろった場合、勝利と判定
@@ -79,7 +100,7 @@ func (b *Board) Win(turn string) bool {
 	return false
 }
 
-// drawメソッドの宣言（引き分けの判定） … ⑤
+// drawメソッドの宣言（引き分けの判定）
 func (b *Board) Draw() bool {
 	for row, rows := range b {
 		for col, _ := range rows {
@@ -91,7 +112,7 @@ func (b *Board) Draw() bool {
 	return true // 未入力の項目がない場合、引き分け
 }
 
-// setBarメソッドの宣言（「"-"」の設定） … ⑥
+// setBarメソッドの宣言（「"-"」の設定）
 func (b *Board) SetBar() {
 	for row, rows := range b {
 		for col, _ := range rows {
