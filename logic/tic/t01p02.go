@@ -3,6 +3,7 @@ package tic
 import (
 	"github.com/gin-gonic/gin"
 	"strconv"
+	"os/exec"
 )
 
 // 盤面などで使用する文字列
@@ -10,13 +11,6 @@ const maru, batsu = "○", "×"
 
 // Board型の宣言
 type Board [3][3]string
-
-// ゲームモード
-// var mode int
-
-func GameStart(c *gin.Context) {
-	println("mode => " + c.PostForm("mode"))
-}
 
 // boardFormValue関数の宣言（盤面の値を取得）
 func BoardFormValue(c *gin.Context) *Board {
@@ -122,3 +116,4 @@ func (b *Board) SetBar() {
 		}
 	}
 }
+

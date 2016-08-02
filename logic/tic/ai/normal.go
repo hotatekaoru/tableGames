@@ -1,5 +1,7 @@
-package main
+package ai
 
-func main() {
+import "tableGames/logic/tic"
+
+func CallAI(board *tic.Board) {
 	println("CPU起動")
 }

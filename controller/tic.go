@@ -4,17 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"tableGames/logic/tic"
-	"os/exec"
+	"tableGames/logic/tic/ai"
 )
 
-func T01G01(c *gin.Context) {
+// ゲームモード
+var mode: string
 
-	// 外部ファイル起動の練習
-	out, err := exec.Command("./normal", "").CombinedOutput()
-	if err != nil {
-		println(err)
-	}
-	println(string(out))
+func T01G01(c *gin.Context) {
 
 	c.HTML(http.StatusOK, "t01.html", gin.H{})
 
@@ -22,7 +18,7 @@ func T01G01(c *gin.Context) {
 
 func T02P01(c *gin.Context) {
 
-	tic.GameStart(c)
+	mode = c.PostForm("mode")
 
 	// 手番を初期化する
 	nextTurn := tic.FirstTurn()
@@ -48,6 +44,13 @@ func T02P02(c *gin.Context) {
 
 	// 勝敗、引き分け、勝者の変数宣言
 	win, draw, winner := tic.JudgeWinner(board, turn)
+
+	if (mode == "1") {
+		// aiを呼び出す
+		board = ai.CallAI(board)
+		println(board)
+
+	}
 
 	c.HTML(http.StatusOK, "t02.html", gin.H{
 		"turn":   nextTurn,
