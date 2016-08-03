@@ -4,11 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"tableGames/logic/tic"
-	"tableGames/logic/tic/ai"
 )
 
 // ゲームモード
-var mode: string
+var mode string
 
 func T01G01(c *gin.Context) {
 
@@ -38,16 +37,16 @@ func T02P01(c *gin.Context) {
 func T02P02(c *gin.Context) {
 
 	// 手番の入力値を取得する
-	turn, nextTurn := tic.TurnFormValue(c)
+	turn, nextTurn := tic.TurnFormValue(c.PostForm("turn"))
 	// 盤面の入力値を取得する
 	board := tic.BoardFormValue(c)
 
 	// 勝敗、引き分け、勝者の変数宣言
 	win, draw, winner := tic.JudgeWinner(board, turn)
 
-	if (mode == "1") {
+	if mode == "1" {
 		// aiを呼び出す
-		board = ai.CallAI(board)
+		tic.CallAI(*board, nextTurn)
 		println(board)
 
 	}

@@ -3,7 +3,6 @@ package tic
 import (
 	"github.com/gin-gonic/gin"
 	"strconv"
-	"os/exec"
 )
 
 // 盤面などで使用する文字列
@@ -39,8 +38,7 @@ func FirstTurn() string {
 }
 
 // turnFormValue関数の宣言（手番の値を取得）
-func TurnFormValue(c *gin.Context) (string, string) {
-	turn := c.PostForm("turn")    // 現在の手番を取得
+func TurnFormValue(turn string) (string, string) {
 	nextTurn := NextTurnMap[turn] // マップを使用して次の手番を取得
 	return turn, nextTurn
 }
