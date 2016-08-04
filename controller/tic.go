@@ -44,10 +44,12 @@ func T02P02(c *gin.Context) {
 	// 勝敗、引き分け、勝者の変数宣言
 	win, draw, winner := tic.JudgeWinner(board, turn)
 
-	if mode == "1" {
+	if !win && !draw && mode == "1" {
 		// aiを呼び出す
 		tic.CallAI(*board, nextTurn)
 		println(board)
+		// 勝敗、引き分け、勝者の変数宣言
+		win, draw, winner = tic.JudgeWinner(board, turn)
 
 	}
 
