@@ -8,10 +8,10 @@ func CallAI(b Board, turn string) {
 	nextTurn := NextTurnMap[turn]
 
 	// 次のターンで勝利できるか
-	if judge := b.reach(turn); judge == true { b.setBoard(turn); return }
+	if judge := b.reach(turn); judge { b.setBoard(turn); return }
 
 	// 次のターンで敗北を阻止できるか
-	if judge := b.reach(nextTurn); judge == true { b.setBoard(turn); return }
+	if judge := b.reach(nextTurn); judge { b.setBoard(turn); return }
 
 	b.searchEmpty(turn)
 	return
