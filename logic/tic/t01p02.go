@@ -18,9 +18,19 @@ func BoardFormValue(c *gin.Context) *Board {
 		for col, _ := range rows {
 			// 盤面のname属性「c00」～「c22」を作成
 			name := "c" + strconv.Itoa(row) + strconv.Itoa(col)
-			println("cell => " + c.PostForm(name))
 			// 盤面の各項目を取得
 			board[row][col] = c.PostForm(name)
+		}
+	}
+	return &board
+}
+
+// boardFormValue関数の宣言（盤面の値を取得）
+func BoardInput(board Board, cell [2]int, turn string) *Board {
+	board[cell[0]][cell[1]] = turn
+	for row, rows := range board {
+		for col, _ := range rows {
+			println(strconv.Itoa(row) + " " + strconv.Itoa(col) + " -> " + board[row][col])
 		}
 	}
 	return &board

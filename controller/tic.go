@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"tableGames/logic/tic"
+	"strconv"
 )
 
 // ゲームモード
@@ -46,8 +47,12 @@ func T02P02(c *gin.Context) {
 
 	if !win && !draw && mode == "1" {
 		// aiを呼び出す
-		tic.CallAI(*board, nextTurn)
-		println(board)
+		cell := tic.CallAI(*board, nextTurn)
+		println("AI result  => " + strconv.Itoa(cell[0]) + " " + strconv.Itoa(cell[1]))
+		// 手番の入力値を取得する
+		turn, nextTurn = tic.TurnFormValue(nextTurn)
+		// 盤面の入力値を取得する
+		board = tic.BoardInput(*board, cell, turn)
 		// 勝敗、引き分け、勝者の変数宣言
 		win, draw, winner = tic.JudgeWinner(board, turn)
 

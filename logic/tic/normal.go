@@ -2,19 +2,18 @@ package tic
 
 var cell [2]int
 
-func CallAI(b Board, turn string) {
+func CallAI(b Board, turn string) [2]int {
 
-	println("CPU起動")
 	nextTurn := NextTurnMap[turn]
 
 	// 次のターンで勝利できるか
-	if judge := b.reach(turn); judge { b.setBoard(turn); return }
+	judge := false
+	if judge = b.reach(turn); judge { return cell }
 
 	// 次のターンで敗北を阻止できるか
-	if judge := b.reach(nextTurn); judge { b.setBoard(turn); return }
+	if judge = b.reach(nextTurn); judge { return cell }
 
-	b.searchEmpty(turn)
-	return
+	return b.searchEmpty(turn)
 }
 
 func (b *Board)reach (color string) bool  {
@@ -23,34 +22,39 @@ func (b *Board)reach (color string) bool  {
 		slice := []string{b[w[0].row][w[0].col],b[w[1].row][w[1].col],b[w[2].row][w[2].col]}
 
 		count1, count2 := 0, 0
+		isEnemy := true
+		empCell := [2]int{0,0}
 		for i, s := range slice {
 			switch s {
 			case color:
 				count1 += 1
 			case "":
 				count2 += 1
-				cell[0] = w[i].row
-				cell[1] = w[i].col
+				empCell[0] = w[i].row
+				empCell[1] = w[i].col
 			default:
-				return false
+				isEnemy = false
 			}
 		}
 
-		if count1 == 2 {return true}
+		if count1 == 2 && isEnemy {
+			cell = empCell
+			return true
+		}
 	}
 
 	return false
 }
 
-func (b *Board)setBoard (color string) { b[cell[0]][cell[1]] = color }
-
-func (b *Board)searchEmpty (color string) {
+func (b *Board)searchEmpty (color string) [2]int {
 	for row, rows := range b {
 		for col, _ := range rows {
 			if b[row][col] == "" {
 				b[row][col] = color
+				return [2]int{row, col}
 			}
 		}
 	}
+	return [2]int{0,0}
 }
 
