@@ -3,8 +3,8 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"tableGames/logic/tic"
 	"strconv"
+	"tableGames/logic/tic"
 )
 
 // ゲームモード
