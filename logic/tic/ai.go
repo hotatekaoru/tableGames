@@ -2,6 +2,7 @@ package tic
 
 var cell [2]int
 
+// 
 func CallAI(b Board, turn string) [2]int {
 
 	nextTurn := NextTurnMap[turn]
