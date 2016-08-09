@@ -9,8 +9,14 @@
 		<div class="alert alert-info">
 			{{if $.win}}
 			[{{$.winner}}の勝ち]
+			<form action="/tic/mode" method="post">
+				<input type="submit" class="btn btn-primary" value="もう1度">
+			</form>
 			{{else if $.draw}}
 			[引き分け]
+			<form action="/tic/mode" method="post">
+				<input type="submit" class="btn btn-primary" value="もう1度">
+			</form>
 			{{else}}
 			[{{$.turn}}の番です。]
 			{{end}}
